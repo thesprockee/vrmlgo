@@ -1,5 +1,7 @@
 package vrmlgo
 
+import "strconv"
+
 type User struct {
 	ID               string `json:"userID"`
 	Email            string `json:"email,omitempty"`
@@ -17,6 +19,10 @@ type User struct {
 	OculusHomeAlias  string `json:"oculusHomeAlias"`
 	StreamURL        string `json:"streamURL"`
 	IsUsingDarkTheme bool   `json:"isUsingDarkTheme"`
+}
+
+func (u User) GetDiscordID() string {
+	return strconv.FormatUint(u.DiscordID, 10)
 }
 
 type UserGames struct {
