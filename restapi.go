@@ -88,6 +88,7 @@ type RequestConfig struct {
 func newRequestConfig(s *Session, req *http.Request) *RequestConfig {
 	return &RequestConfig{
 		ShouldRetryOnRateLimit: s.ShouldRetryOnRateLimit,
+		ShouldUseCache:         s.CacheEnabled,
 		MaxRestRetries:         s.MaxRestRetries,
 		Client:                 s.Client,
 		Request:                req,
