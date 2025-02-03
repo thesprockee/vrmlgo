@@ -316,6 +316,8 @@ func unmarshal(data []byte, v interface{}) error {
 }
 
 func (s *Session) Me(options ...RequestOption) (st *User, err error) {
+	// Do not cache @Me requests
+	options = append(options, WithUseCache(false))
 
 	body, err := s.RequestWithBucketID("GET", EndpointMe, nil, EndpointAPI, options...)
 	if err != nil {

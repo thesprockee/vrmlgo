@@ -7,7 +7,7 @@ import (
 
 // This is modeled after github.com/bwmarrin/discordgo/discord.go
 
-const VERSION = "1.0.0"
+const VERSION = "1.0.2"
 
 func New(token string) (s *Session) {
 
