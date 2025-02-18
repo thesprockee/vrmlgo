@@ -381,3 +381,25 @@ func (s *Session) Match(gName, matchID string, options ...RequestOption) (st *Ma
 	err = unmarshal(body, &st)
 	return
 }
+
+func (s *Session) Team(teamID string, options ...RequestOption) (st *TeamDetails, err error) {
+
+	body, err := s.RequestWithBucketID("GET", EndpointTeam(teamID), nil, EndpointAPI)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(body, &st)
+	return
+}
+
+func (s *Session) Player(playerID string, options ...RequestOption) (st *Player, err error) {
+
+	body, err := s.RequestWithBucketID("GET", EndpointPlayer(playerID), nil, EndpointAPI)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(body, &st)
+	return
+}

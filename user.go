@@ -37,9 +37,9 @@ type UserGames struct {
 }
 
 type UserTeams struct {
-	Teams           []TeamMetadata `json:"teams"`
-	Substitutes     []interface{}  `json:"substitutes"`
-	PendingRecruits []interface{}  `json:"pendingRecruits"`
+	Teams           []Team        `json:"teams"`
+	Substitutes     []interface{} `json:"substitutes"`
+	PendingRecruits []interface{} `json:"pendingRecruits"`
 }
 
 type Region struct {

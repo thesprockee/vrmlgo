@@ -3,7 +3,7 @@ package vrmlgo
 import "slices"
 
 type Member struct {
-	Metadata                      User        `json:"user"`
+	User                          *User       `json:"user"`
 	Games                         []UserGames `json:"allGames"`
 	AllPlayersSameDiscord         interface{} `json:"allPlayersSameDiscord"`
 	AllPlayersSameIP              interface{} `json:"allPlayersSameIP"`
@@ -13,9 +13,10 @@ type Member struct {
 	CurrentUserIsModInRelatedGame bool        `json:"currentUserIsModInRelatedGame"`
 }
 
-func (a *Member) PlayerID(gameUrlShort string) string {
+// PlayerID returns the player ID of the user for a given game.
+func (a *Member) PlayerID(gameName string) string {
 	for _, g := range a.Games {
-		if g.Game.ShortName == gameUrlShort {
+		if g.Game.ShortName == gameName {
 			if g.BioCurrent.PlayerID != "" {
 				return g.BioCurrent.PlayerID
 			}
@@ -37,11 +38,11 @@ func (a *Member) PlayerID(gameUrlShort string) string {
 }
 
 // Teams returns a list of team IDs that the user is a member of for a given game.
-func (a *Member) Teams(urlShort string) []string {
+func (a *Member) Teams(gameName string) []string {
 	teamIDs := make([]string, 0)
 
 	for _, g := range a.Games {
-		if g.Game.ShortName == urlShort {
+		if g.Game.ShortName == gameName {
 
 			teamIDs = append(teamIDs, g.BioCurrent.TeamID)
 
