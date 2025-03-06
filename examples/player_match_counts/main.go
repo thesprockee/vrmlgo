@@ -32,11 +32,14 @@ func main() {
 		panic(err)
 	}
 
-	// Get the account information
-	account, err := vg.Member(me.ID, vrmlgo.WithUseCache(false))
+	// Get the member information
+	member, err := vg.Member(me.ID, vrmlgo.WithUseCache(false))
 	if err != nil {
 		panic(err)
 	}
+
+	data, _ := json.MarshalIndent(member, "", "  ")
+	fmt.Println(string(data))
 
 	// Get the game details
 	gameDetails, err := vg.GameSearch("EchoArena")
@@ -58,11 +61,11 @@ func main() {
 	}
 
 	// Get the player ID for this game
-	playerID := account.PlayerID(gameDetails.Game.ShortName)
+	playerID := member.PlayerID(gameDetails.Game.ShortName)
 
 	// Get the match history for each team
 	matchesBySeason := make(map[string][]string)
-	for _, t := range account.Teams(gameDetails.Game.ShortName) {
+	for _, t := range member.Teams(gameDetails.Game.ShortName) {
 
 		history, err := vg.TeamMatchesHistory(t)
 		if err != nil {

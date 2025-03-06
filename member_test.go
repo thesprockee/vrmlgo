@@ -1,0 +1,265 @@
+package vrmlgo
+
+import (
+	"encoding/json"
+	"testing"
+)
+
+func TestPlayerID(t *testing.T) {
+
+	member := Member{}
+	err := json.Unmarshal([]byte(userJSONData), &member)
+	if err != nil {
+		t.Errorf("error unmarshalling json: %v", err)
+	}
+
+	result := member.PlayerID("EchoArena")
+	if result != "4rPCIjBhKhGpG4uDnfHlfg2" {
+		t.Errorf("PlayerID was incorrect, got: %s, want: %s.", result, "4rPCIjBhKhGpG4uDnfHlfg2")
+	}
+}
+
+var userJSONData = `
+{
+  "user": {
+    "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+    "userName": "sprockee",
+    "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+    "country": "US",
+    "nationality": "US",
+    "dateJoinedUTC": "2020-11-12 03:34",
+    "theme": "",
+    "timezoneID": "",
+    "discordID": 695081603180789771,
+    "discordTag": "sprockee#0",
+    "steamID": "",
+    "oculusHomeID": "",
+    "oculusHomeAlias": "",
+    "streamURL": "",
+    "isUsingDarkTheme": false
+  },
+  "allGames": [
+    {
+      "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+      "playerName": "sprockee",
+      "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+      "game": {
+        "gameID": "qsj3DFN9YedxbZaAjjKKHA2",
+        "roundsPerMap": 0,
+        "gameByUrl": "",
+        "gameByImage": "",
+        "headerImage": "",
+        "homeTitleImage": null,
+        "discordInvite": "",
+        "discordServerID": "",
+        "youtube": "",
+        "twitter": "",
+        "reddit": "",
+        "facebook": "",
+        "gameName": "Echo Arena",
+        "teamMode": "team",
+        "matchMode": "match",
+        "url": "/EchoArena",
+        "urlShort": "EchoArena",
+        "urlComplete": "https://vrmasterleague.com/EchoArena",
+        "hasSubstitutes": true,
+        "hasTies": false,
+        "hasCasters": true,
+        "hasCameraman": true
+      },
+      "bioCurrent": {
+        "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+        "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+        "playerName": "sprockee",
+        "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+        "country": "US",
+        "nationality": "US",
+        "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+        "role": "Team Owner",
+        "isTeamOwner": true,
+        "isTeamStarter": true,
+        "teamID": "kp7gvYxskuO0ylryfX5oVw2",
+        "teamName": "Giggles",
+        "teamNameFull": "Giggles",
+        "teamLogo": "/images/logos/teams/45c57b0d-bcc9-4521-a880-21319836d742.png",
+        "honoursMention": null,
+        "honoursMentionLogo": null,
+        "cooldownID": null,
+        "cooldownNote": null,
+        "cooldownDateExpiresUTC": null
+      },
+      "bioCurrentDef": {
+        "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+        "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+        "playerName": "sprockee",
+        "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+        "country": "US",
+        "nationality": "US",
+        "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+        "role": "Team Owner",
+        "isTeamOwner": true,
+        "isTeamStarter": true,
+        "teamID": "kp7gvYxskuO0ylryfX5oVw2",
+        "teamName": "Giggles",
+        "teamNameFull": "Giggles",
+        "teamLogo": "/images/logos/teams/45c57b0d-bcc9-4521-a880-21319836d742.png",
+        "honoursMention": null,
+        "honoursMentionLogo": null,
+        "cooldownID": null,
+        "cooldownNote": null,
+        "cooldownDateExpiresUTC": null
+      },
+      "bioCurrentSeasonPastTeams": [
+        {
+          "teamMode": "team",
+          "gameUrl": "EchoArena",
+          "seasonID": "la1xDIFPC6E-0eo429SKFA2",
+          "seasonName": "Season 7 - 2023",
+          "divisionLogo": "/images/div_platinum_3.png",
+          "divisionName": "Platinum 3",
+          "mmr": "1280",
+          "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+          "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+          "playerName": "sprockee",
+          "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+          "country": "US",
+          "nationality": "US",
+          "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+          "role": "Team Owner",
+          "isTeamOwner": true,
+          "isTeamStarter": true,
+          "teamID": "kp7gvYxskuO0ylryfX5oVw2",
+          "teamName": "Giggles",
+          "teamNameFull": "Giggles",
+          "teamLogo": "/images/logos/teams/45c57b0d-bcc9-4521-a880-21319836d742.png",
+          "honoursMention": null,
+          "honoursMentionLogo": null,
+          "cooldownID": null,
+          "cooldownNote": null,
+          "cooldownDateExpiresUTC": null
+        }
+      ],
+      "bioPastSeasons": [
+        {
+          "teamMode": "team",
+          "gameUrl": "EchoArena",
+          "seasonID": "n0PsCrBx_-rpjiXABiftSw2",
+          "seasonName": "Season 6 - 2022",
+          "divisionLogo": "/images/div_diamond_2.png",
+          "divisionName": "Diamond 2",
+          "mmr": "1240",
+          "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+          "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+          "playerName": "sprockee",
+          "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+          "country": "US",
+          "nationality": "US",
+          "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+          "role": "Team Owner",
+          "isTeamOwner": true,
+          "isTeamStarter": true,
+          "teamID": "sPULGkCQIYMh7JzkAJqmtA2",
+          "teamName": "Giggles",
+          "teamNameFull": "Giggles",
+          "teamLogo": "/images/logos/teams/28f15e4d-4e5d-4028-8038-9dc605f4af8a.jpg",
+          "honoursMention": null,
+          "honoursMentionLogo": null,
+          "cooldownID": null,
+          "cooldownNote": null,
+          "cooldownDateExpiresUTC": null
+        },
+        {
+          "teamMode": "team",
+          "gameUrl": "EchoArena",
+          "seasonID": "XKVgWTi5AdpkSQnLhhs7bw2",
+          "seasonName": "Season 5 - 2022",
+          "divisionLogo": "/images/div_diamond_2.png",
+          "divisionName": "Diamond 2",
+          "mmr": "1240",
+          "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+          "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+          "playerName": "sprockee",
+          "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+          "country": "US",
+          "nationality": "US",
+          "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+          "role": "Team Owner",
+          "isTeamOwner": true,
+          "isTeamStarter": true,
+          "teamID": "sPULGkCQIYMh7JzkAJqmtA2",
+          "teamName": "Giggles",
+          "teamNameFull": "Giggles",
+          "teamLogo": "/images/logos/teams/28f15e4d-4e5d-4028-8038-9dc605f4af8a.jpg",
+          "honoursMention": null,
+          "honoursMentionLogo": null,
+          "cooldownID": null,
+          "cooldownNote": null,
+          "cooldownDateExpiresUTC": null
+        },
+        {
+          "teamMode": "team",
+          "gameUrl": "EchoArena",
+          "seasonID": "YJoYnb3iWN8EcCrs92U04A2",
+          "seasonName": "Season 4 - 2021",
+          "divisionLogo": "/images/div_diamond_2.png",
+          "divisionName": "Diamond 2",
+          "mmr": "1260",
+          "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+          "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+          "playerName": "sprockee",
+          "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+          "country": "US",
+          "nationality": "US",
+          "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+          "role": "Team Owner",
+          "isTeamOwner": true,
+          "isTeamStarter": true,
+          "teamID": "sPULGkCQIYMh7JzkAJqmtA2",
+          "teamName": "Giggles",
+          "teamNameFull": "Giggles",
+          "teamLogo": "/images/logos/teams/28f15e4d-4e5d-4028-8038-9dc605f4af8a.jpg",
+          "honoursMention": null,
+          "honoursMentionLogo": null,
+          "cooldownID": null,
+          "cooldownNote": null,
+          "cooldownDateExpiresUTC": null
+        },
+        {
+          "teamMode": "team",
+          "gameUrl": "EchoArena",
+          "seasonID": "XPtJ0s7XBpsbDHrjS0e_3g2",
+          "seasonName": "Season 3 - 2021",
+          "divisionLogo": "/images/div_diamond.png",
+          "divisionName": "Diamond",
+          "mmr": "1200",
+          "playerID": "4rPCIjBhKhGpG4uDnfHlfg2",
+          "userID": "mXa3ymwkAP_aVEsj9gx0_Q2",
+          "playerName": "sprockee",
+          "userLogo": "/images/logos/users/25d45af7-f6a8-40ef-a035-879a61869c8f.png",
+          "country": "US",
+          "nationality": "US",
+          "roleID": "M40DmiDmyky3AVn8ypAC1g2",
+          "role": "Team Owner",
+          "isTeamOwner": true,
+          "isTeamStarter": true,
+          "teamID": "sPULGkCQIYMh7JzkAJqmtA2",
+          "teamName": "Giggles",
+          "teamNameFull": "Giggles",
+          "teamLogo": "/images/logos/teams/28f15e4d-4e5d-4028-8038-9dc605f4af8a.jpg",
+          "honoursMention": null,
+          "honoursMentionLogo": null,
+          "cooldownID": null,
+          "cooldownNote": null,
+          "cooldownDateExpiresUTC": null
+        }
+      ]
+    }
+  ],
+  "allPlayersSameDiscord": null,
+  "allPlayersSameIP": null,
+  "penaltyPoints": null,
+  "banInfo": null,
+  "locationFromIP": null,
+  "currentUserIsModInRelatedGame": false
+}
+`

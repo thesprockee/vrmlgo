@@ -16,24 +16,29 @@ type Member struct {
 // PlayerID returns the player ID of the user for a given game.
 func (a *Member) PlayerID(gameName string) string {
 	for _, g := range a.Games {
-		if g.Game.ShortName == gameName {
-			if g.BioCurrent.PlayerID != "" {
-				return g.BioCurrent.PlayerID
-			}
 
-			for _, t := range g.BioCurrentSeasonPastTeams {
-				if t.PlayerID != "" {
-					return t.PlayerID
-				}
-			}
+		if g.Game.ShortName != gameName {
+			continue
+		}
 
-			for _, t := range g.BioPastSeasons {
-				if t.PlayerID != "" {
-					return t.PlayerID
-				}
+		if g.BioCurrent.PlayerID != "" {
+			return g.BioCurrent.PlayerID
+		}
+
+		for _, t := range g.BioCurrentSeasonPastTeams {
+			if t.PlayerID != "" {
+				return t.PlayerID
 			}
 		}
+
+		for _, t := range g.BioPastSeasons {
+			if t.PlayerID != "" {
+				return t.PlayerID
+			}
+		}
+
 	}
+
 	return ""
 }
 
@@ -58,7 +63,7 @@ func (a *Member) Teams(gameName string) []string {
 
 	for i := 0; i < len(teamIDs); i++ {
 		if teamIDs[i] == "" {
-			teamIDs = append(teamIDs[:i], teamIDs[i+1:]...)
+			teamIDs = slices.Delete(teamIDs, i, i+1)
 			i--
 		}
 	}
