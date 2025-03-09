@@ -48,7 +48,7 @@ func main() {
 	}
 
 	// Get the seasons for the game
-	seasons, err := vg.Seasons(gameDetails.Game.ShortName)
+	seasons, err := vg.GameSeasons(gameDetails.Game.ShortName)
 	if err != nil {
 		panic(err)
 	}
@@ -65,7 +65,7 @@ func main() {
 
 	// Get the match history for each team
 	matchesBySeason := make(map[string][]string)
-	for _, t := range member.Teams(gameDetails.Game.ShortName) {
+	for _, t := range member.TeamIDs(gameDetails.Game.ShortName) {
 
 		history, err := vg.TeamMatchesHistory(t)
 		if err != nil {
@@ -86,7 +86,7 @@ func main() {
 		for _, mID := range matchesBySeason[season.Name] {
 
 			// Get the match details
-			matchDetails, err := vg.Match(gameDetails.Game.ShortName, mID)
+			matchDetails, err := vg.GameMatch(gameDetails.Game.ShortName, mID)
 			if err != nil {
 				panic(err)
 			}

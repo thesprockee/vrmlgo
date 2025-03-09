@@ -418,7 +418,7 @@ func (s *Session) GameMatch(gName, matchID string, options ...RequestOption) (st
 	err = unmarshal(body, &st)
 	return
 }
-func (s *Session) GamePlayersSearch(gameName string, seasonID string, name string, options ...RequestOption) (players []*PlayerCompact, err error) {
+func (s *Session) GamePlayersSearch(gameName string, seasonID string, name string, options ...RequestOption) (players []*PlayerSearchResult, err error) {
 
 	endpoint := EndpointGamePlayersSearch(gameName)
 
@@ -443,7 +443,7 @@ func (s *Session) GamePlayersSearch(gameName string, seasonID string, name strin
 		return
 	}
 
-	players = make([]*PlayerCompact, 0)
+	players = make([]*PlayerSearchResult, 0)
 	err = unmarshal(body, &players)
 	return
 }

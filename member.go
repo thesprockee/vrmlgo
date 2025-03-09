@@ -4,7 +4,7 @@ import "slices"
 
 type Member struct {
 	User                          *User       `json:"user"`
-	Games                         []UserGames `json:"allGames"`
+	Games                         []UserGame  `json:"allGames"`
 	AllPlayersSameDiscord         interface{} `json:"allPlayersSameDiscord"`
 	AllPlayersSameIP              interface{} `json:"allPlayersSameIP"`
 	PenaltyPoints                 interface{} `json:"penaltyPoints"`
@@ -43,28 +43,12 @@ func (a *Member) PlayerID(gameName string) string {
 }
 
 // Teams returns a list of team IDs that the user is a member of for a given game.
-func (a *Member) Teams(gameName string) []string {
+func (a *Member) TeamIDs(gameName string) []string {
 	teamIDs := make([]string, 0)
 
 	for _, g := range a.Games {
 		if g.Game.ShortName == gameName {
-
-			teamIDs = append(teamIDs, g.BioCurrent.TeamID)
-
-			for _, t := range g.BioCurrentSeasonPastTeams {
-				teamIDs = append(teamIDs, t.TeamID)
-			}
-
-			for _, t := range g.BioPastSeasons {
-				teamIDs = append(teamIDs, t.TeamID)
-			}
-		}
-	}
-
-	for i := 0; i < len(teamIDs); i++ {
-		if teamIDs[i] == "" {
-			teamIDs = slices.Delete(teamIDs, i, i+1)
-			i--
+			teamIDs = append(teamIDs, g.TeamIDs()...)
 		}
 	}
 

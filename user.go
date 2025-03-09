@@ -1,6 +1,9 @@
 package vrmlgo
 
-import "strconv"
+import (
+	"slices"
+	"strconv"
+)
 
 type User struct {
 	ID               string `json:"userID"`
@@ -25,7 +28,7 @@ func (u User) GetDiscordID() string {
 	return strconv.FormatUint(u.DiscordID, 10)
 }
 
-type UserGames struct {
+type UserGame struct {
 	PlayerID                  string                            `json:"playerID"`
 	PlayerName                string                            `json:"playerName"`
 	UserLogo                  string                            `json:"userLogo"`
@@ -34,6 +37,32 @@ type UserGames struct {
 	BioCurrentDef             BioCurrent                        `json:"bioCurrentDef"`
 	BioCurrentSeasonPastTeams []BioCurrentSeasonPastTeamElement `json:"bioCurrentSeasonPastTeams"`
 	BioPastSeasons            []BioCurrentSeasonPastTeamElement `json:"bioPastSeasons"`
+}
+
+// Teams returns a list of team IDs that the user is a member of for a given game.
+func (g *UserGame) TeamIDs() []string {
+	teamIDs := make([]string, 0)
+
+	teamIDs = append(teamIDs, g.BioCurrent.TeamID)
+
+	for _, t := range g.BioCurrentSeasonPastTeams {
+		teamIDs = append(teamIDs, t.TeamID)
+	}
+
+	for _, t := range g.BioPastSeasons {
+		teamIDs = append(teamIDs, t.TeamID)
+	}
+	for i := 0; i < len(teamIDs); i++ {
+		if teamIDs[i] == "" {
+			teamIDs = slices.Delete(teamIDs, i, i+1)
+			i--
+		}
+	}
+
+	slices.Sort(teamIDs)
+	teamIDs = slices.Compact(teamIDs)
+
+	return teamIDs
 }
 
 type UserTeams struct {
