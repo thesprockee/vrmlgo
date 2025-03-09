@@ -270,7 +270,7 @@ func (s *Session) RequestWithLockedBucket(method, urlStr, contentType string, b 
 			s.log(LogInformational, "%s Failed (%s), Retrying...", urlStr, resp.Status)
 			response, err = s.RequestWithLockedBucket(method, urlStr, contentType, b, s.Ratelimiter.LockBucketObject(bucket), sequence+1, options...)
 		} else {
-			err = fmt.Errorf("Exceeded Max retries HTTP %s, %s", resp.Status, response)
+			err = fmt.Errorf("exceeded Max retries HTTP %s, %s", resp.Status, response)
 		}
 	case 429: // TOO MANY REQUESTS - Rate limiting
 		rl := TooManyRequests{}
@@ -319,8 +319,8 @@ func unmarshal(data []byte, v interface{}) error {
 func (s *Session) Me(options ...RequestOption) (st *User, err error) {
 	// Do not cache @Me requests
 	options = append(options, WithUseCache(false))
-
-	body, err := s.RequestWithBucketID("GET", EndpointMe, nil, EndpointAPI, options...)
+	endpoint := EndpointMe
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -330,8 +330,8 @@ func (s *Session) Me(options ...RequestOption) (st *User, err error) {
 }
 
 func (s *Session) Member(userID string, options ...RequestOption) (st *Member, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointMember(userID), nil, EndpointAPI)
+	endpoint := EndpointMember(userID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -341,8 +341,8 @@ func (s *Session) Member(userID string, options ...RequestOption) (st *Member, e
 }
 
 func (s *Session) GameSearch(gameName string, options ...RequestOption) (st *GameDetails, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointGame(gameName), nil, EndpointAPI)
+	endpoint := EndpointGame(gameName)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -352,7 +352,8 @@ func (s *Session) GameSearch(gameName string, options ...RequestOption) (st *Gam
 }
 
 func (s *Session) Seasons(gameName string, options ...RequestOption) (st []*Season, err error) {
-	body, err := s.RequestWithBucketID("GET", EndpointSeasons(gameName), nil, EndpointAPI)
+	endpoint := EndpointSeasons(gameName)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -362,8 +363,8 @@ func (s *Session) Seasons(gameName string, options ...RequestOption) (st []*Seas
 }
 
 func (s *Session) TeamMatchesHistory(teamID string, options ...RequestOption) (st []*MatchHistory, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointTeamMatchesHistory(teamID), nil, EndpointAPI)
+	endpoint := EndpointTeamMatchesHistory(teamID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -373,8 +374,8 @@ func (s *Session) TeamMatchesHistory(teamID string, options ...RequestOption) (s
 }
 
 func (s *Session) Match(gName, matchID string, options ...RequestOption) (st *MatchDetails, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointMatch(gName, matchID), nil, EndpointAPI)
+	endpoint := EndpointMatch(gName, matchID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -384,8 +385,8 @@ func (s *Session) Match(gName, matchID string, options ...RequestOption) (st *Ma
 }
 
 func (s *Session) Team(teamID string, options ...RequestOption) (st *TeamDetails, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointTeam(teamID), nil, EndpointAPI)
+	endpoint := EndpointTeam(teamID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
@@ -395,8 +396,8 @@ func (s *Session) Team(teamID string, options ...RequestOption) (st *TeamDetails
 }
 
 func (s *Session) Player(playerID string, options ...RequestOption) (st *Player, err error) {
-
-	body, err := s.RequestWithBucketID("GET", EndpointPlayer(playerID), nil, EndpointAPI)
+	endpoint := EndpointPlayer(playerID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
 	}
