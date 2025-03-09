@@ -340,19 +340,8 @@ func (s *Session) Member(userID string, options ...RequestOption) (st *Member, e
 	return
 }
 
-func (s *Session) GameSearch(gameName string, options ...RequestOption) (st *GameDetails, err error) {
-	endpoint := EndpointGame(gameName)
-	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
-	if err != nil {
-		return
-	}
-
-	err = unmarshal(body, &st)
-	return
-}
-
-func (s *Session) Seasons(gameName string, options ...RequestOption) (st []*Season, err error) {
-	endpoint := EndpointSeasons(gameName)
+func (s *Session) GameSeasons(gameName string, options ...RequestOption) (st []*Season, err error) {
+	endpoint := EndpointGameSeasons(gameName)
 	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
@@ -364,17 +353,6 @@ func (s *Session) Seasons(gameName string, options ...RequestOption) (st []*Seas
 
 func (s *Session) TeamMatchesHistory(teamID string, options ...RequestOption) (st []*MatchHistory, err error) {
 	endpoint := EndpointTeamMatchesHistory(teamID)
-	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
-	if err != nil {
-		return
-	}
-
-	err = unmarshal(body, &st)
-	return
-}
-
-func (s *Session) Match(gName, matchID string, options ...RequestOption) (st *MatchDetails, err error) {
-	endpoint := EndpointMatch(gName, matchID)
 	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
 	if err != nil {
 		return
@@ -406,9 +384,30 @@ func (s *Session) Player(playerID string, options ...RequestOption) (st *Player,
 	return
 }
 
-func (s *Session) PlayerSearch(gameName string, seasonID string, name string, options ...RequestOption) (players []*PlayerCompact, err error) {
+func (s *Session) GameSearch(gameName string, options ...RequestOption) (st *GameDetails, err error) {
+	endpoint := EndpointGame(gameName)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
+	if err != nil {
+		return
+	}
 
-	endpoint := EndpointPlayersSearch(gameName, seasonID, name)
+	err = unmarshal(body, &st)
+	return
+}
+
+func (s *Session) GameMatch(gName, matchID string, options ...RequestOption) (st *MatchDetails, err error) {
+	endpoint := EndpointGameMatch(gName, matchID)
+	body, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint, options...)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(body, &st)
+	return
+}
+func (s *Session) GamePlayersSearch(gameName string, seasonID string, name string, options ...RequestOption) (players []*PlayerCompact, err error) {
+
+	endpoint := EndpointGamePlayersSearch(gameName)
 
 	uri := endpoint
 
