@@ -8,8 +8,10 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -273,16 +275,27 @@ func (s *Session) RequestWithLockedBucket(method, urlStr, contentType string, b 
 			err = fmt.Errorf("exceeded Max retries HTTP %s, %s", resp.Status, response)
 		}
 	case 429: // TOO MANY REQUESTS - Rate limiting
-		rl := TooManyRequests{}
-		err = Unmarshal(response, &rl)
-		if err != nil {
-			s.log(LogError, "rate limit unmarshal error, %s", err)
-			return
+		rl := TooManyRequests{
+			Message: resp.Header.Get("X-Ratelimit-Limit"),
+		}
+
+		if resp.Header.Get("X-Ratelimit-Global") == "true" {
+			rl.Bucket = "global"
+		}
+		if resetAfter := resp.Header.Get("X-Ratelimit-Reset-After"); resetAfter != "" {
+
+			parsedAfter, err := strconv.ParseFloat(resetAfter, 64)
+			if err != nil {
+				return nil, err
+			}
+
+			whole, frac := math.Modf(parsedAfter)
+			rl.RetryAfter = time.Duration(whole)*time.Second + time.Duration(frac*1000)*time.Millisecond
+
 		}
 
 		if cfg.ShouldRetryOnRateLimit {
 			s.log(LogInformational, "Rate Limiting %s, retry in %v", urlStr, rl.RetryAfter)
-
 			time.Sleep(rl.RetryAfter)
 			// we can make the above smarter
 			// this method can cause longer delays than required
