@@ -31,3 +31,9 @@ type Player struct {
 	IsTeamOwnerCaptainOrCoCaptain bool        `json:"isTeamOwnerCaptainOrCoCaptain"`
 	IsTeamStarter                 bool        `json:"isTeamStarter"`
 }
+
+type PlayerCompact struct {
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	Image string `json:"image"`
+}

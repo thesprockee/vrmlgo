@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -401,5 +402,35 @@ func (s *Session) Player(playerID string, options ...RequestOption) (st *Player,
 	}
 
 	err = unmarshal(body, &st)
+	return
+}
+
+func (s *Session) PlayerSearch(gameName string, seasonID string, name string, options ...RequestOption) (players []*PlayerCompact, err error) {
+
+	endpoint := EndpointPlayersSearch(gameName, seasonID, name)
+
+	uri := endpoint
+
+	v := url.Values{}
+
+	if seasonID != "" {
+		v.Set("season", seasonID)
+	}
+
+	if name != "" {
+		v.Set("name", name)
+	}
+
+	if len(v) > 0 {
+		uri += "?" + v.Encode()
+	}
+
+	body, err := s.RequestWithBucketID("GET", uri, nil, endpoint, options...)
+	if err != nil {
+		return
+	}
+
+	players = make([]*PlayerCompact, 0)
+	err = unmarshal(body, &players)
 	return
 }
