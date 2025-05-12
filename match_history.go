@@ -5,12 +5,12 @@ type MatchHistory struct {
 	SeasonName                string      `json:"seasonName"`
 	WinningTeamID             string      `json:"winningTeamID"`
 	LosingTeamID              string      `json:"losingTeamID"`
-	HomeScore                 int64       `json:"homeScore"`
-	AwayScore                 int64       `json:"awayScore"`
+	HomeScore                 int         `json:"homeScore"`
+	AwayScore                 int         `json:"awayScore"`
 	IsTie                     bool        `json:"isTie"`
 	IsForfeit                 bool        `json:"isForfeit"`
 	MatchID                   string      `json:"matchID"`
-	Week                      int64       `json:"week"`
+	Week                      int         `json:"week"`
 	IsScheduled               bool        `json:"isScheduled"`
 	IsSpecificDivision        bool        `json:"isSpecificDivision"`
 	IsChallenge               bool        `json:"isChallenge"`
@@ -22,16 +22,16 @@ type MatchHistory struct {
 	AwayTeam                  MatchTeam   `json:"awayTeam"`
 	CastingInfo               CastingInfo `json:"castingInfo"`
 	VODURL                    *string     `json:"vodUrl"`
-	HomeHighlights            interface{} `json:"homeHighlights"`
-	AwayHighlights            interface{} `json:"awayHighlights"`
+	HomeHighlights            any         `json:"homeHighlights"`
+	AwayHighlights            any         `json:"awayHighlights"`
 	PostponeTeamID            *string     `json:"postponeTeamID"`
 	ModsReview                bool        `json:"modsReview"`
-	ModsReviewNote            interface{} `json:"modsReviewNote"`
+	ModsReviewNote            any         `json:"modsReviewNote"`
 }
 
 type MapsSet struct {
-	MapNum    int64  `json:"mapNum"`
+	MapNum    int    `json:"mapNum"`
 	MapName   string `json:"mapName"`
-	HomeScore int64  `json:"homeScore"`
-	AwayScore int64  `json:"awayScore"`
+	HomeScore int    `json:"homeScore"`
+	AwayScore int    `json:"awayScore"`
 }

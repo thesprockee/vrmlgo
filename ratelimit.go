@@ -116,7 +116,7 @@ type Bucket struct {
 
 	lastReset       time.Time
 	customRateLimit *customRateLimit
-	Userdata        interface{}
+	Userdata        any
 }
 
 // Release unlocks the bucket and reads the headers to update the buckets ratelimit info

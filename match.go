@@ -6,15 +6,15 @@ type MatchDetails struct {
 	PlayersAway []*MatchPlayer `json:"playersAway"`
 	//Season               Season            `json:"season"` // This (incorrectly?) returns the latest season
 	CurrentUserTeamID    string            `json:"currentUserTeamID"`
-	HomeTeamRank         int64             `json:"homeTeamRank"`
-	AwayTeamRank         int64             `json:"awayTeamRank"`
+	HomeTeamRank         int               `json:"homeTeamRank"`
+	AwayTeamRank         int               `json:"awayTeamRank"`
 	PastMatchesCommon    []Match           `json:"pastMatchesCommon"`
 	StatsMapsCommon      []StatsMapsCommon `json:"statsMapsCommon"`
 	StatsMapsHome        []StatsMaps       `json:"statsMapsHome"`
 	StatsMapsAway        []StatsMaps       `json:"statsMapsAway"`
-	ModsMatchInformation interface{}       `json:"modsMatchInformation"`
-	Streamers            interface{}       `json:"streamers"`
-	Streamer             interface{}       `json:"streamer"`
+	ModsMatchInformation any               `json:"modsMatchInformation"`
+	Streamers            any               `json:"streamers"`
+	Streamer             any               `json:"streamer"`
 }
 
 func (m *MatchDetails) Players() []*MatchPlayer {
@@ -26,11 +26,11 @@ type Match struct {
 	SeasonName                string      `json:"seasonName"`
 	WinningTeamID             string      `json:"winningTeamID"`
 	LosingTeamID              string      `json:"losingTeamID"`
-	HomeScore                 int64       `json:"homeScore"`
-	AwayScore                 int64       `json:"awayScore"`
+	HomeScore                 int         `json:"homeScore"`
+	AwayScore                 int         `json:"awayScore"`
 	IsTie                     bool        `json:"isTie"`
 	IsForfeit                 bool        `json:"isForfeit"`
-	Week                      int64       `json:"week"`
+	Week                      int         `json:"week"`
 	IsScheduled               bool        `json:"isScheduled"`
 	IsSpecificDivision        bool        `json:"isSpecificDivision"`
 	IsChallenge               bool        `json:"isChallenge"`
@@ -42,11 +42,11 @@ type Match struct {
 	AwayTeam                  MatchTeam   `json:"awayTeam"`
 	CastingInfo               CastingInfo `json:"castingInfo"`
 	VODURL                    string      `json:"vodUrl"`
-	HomeHighlights            interface{} `json:"homeHighlights"`
-	AwayHighlights            interface{} `json:"awayHighlights"`
-	PostponeTeamID            interface{} `json:"postponeTeamID"`
+	HomeHighlights            any         `json:"homeHighlights"`
+	AwayHighlights            any         `json:"awayHighlights"`
+	PostponeTeamID            any         `json:"postponeTeamID"`
 	ModsReview                bool        `json:"modsReview"`
-	ModsReviewNote            interface{} `json:"modsReviewNote"`
+	ModsReviewNote            any         `json:"modsReviewNote"`
 }
 
 type MatchTeam struct {
@@ -61,21 +61,21 @@ type MatchTeam struct {
 }
 
 type CastingInfo struct {
-	ChannelType           *int64      `json:"channelType"`
-	ChannelID             *string     `json:"channelID"`
-	ChannelURL            *string     `json:"channelURL"`
-	CasterID              *string     `json:"casterID"`
-	Caster                *string     `json:"caster"`
-	CasterLogo            *string     `json:"casterLogo"`
-	CoCasterID            *string     `json:"coCasterID"`
-	CoCaster              *string     `json:"coCaster"`
-	CoCasterLogo          *string     `json:"coCasterLogo"`
-	PostGameInterviewID   interface{} `json:"postGameInterviewID"`
-	PostGameInterview     interface{} `json:"postGameInterview"`
-	PostGameInterviewLogo interface{} `json:"postGameInterviewLogo"`
-	CameramanID           *string     `json:"cameramanID"`
-	Cameraman             *string     `json:"cameraman"`
-	CameramanLogo         *string     `json:"cameramanLogo"`
+	ChannelType           *int    `json:"channelType"`
+	ChannelID             *string `json:"channelID"`
+	ChannelURL            *string `json:"channelURL"`
+	CasterID              *string `json:"casterID"`
+	Caster                *string `json:"caster"`
+	CasterLogo            *string `json:"casterLogo"`
+	CoCasterID            *string `json:"coCasterID"`
+	CoCaster              *string `json:"coCaster"`
+	CoCasterLogo          *string `json:"coCasterLogo"`
+	PostGameInterviewID   any     `json:"postGameInterviewID"`
+	PostGameInterview     any     `json:"postGameInterview"`
+	PostGameInterviewLogo any     `json:"postGameInterviewLogo"`
+	CameramanID           *string `json:"cameramanID"`
+	Cameraman             *string `json:"cameraman"`
+	CameramanLogo         *string `json:"cameramanLogo"`
 }
 
 type MatchPlayer struct {
@@ -97,23 +97,23 @@ type MatchPlayer struct {
 
 type StatsMaps struct {
 	MapName             string `json:"mapName"`
-	Played              int64  `json:"played"`
-	Win                 int64  `json:"win"`
-	WinPercentage       int64  `json:"winPercentage"`
-	RoundsPlayed        int64  `json:"roundsPlayed"`
-	RoundsWin           int64  `json:"roundsWin"`
-	RoundsWinPercentage int64  `json:"roundsWinPercentage"`
+	Played              int    `json:"played"`
+	Win                 int    `json:"win"`
+	WinPercentage       int    `json:"winPercentage"`
+	RoundsPlayed        int    `json:"roundsPlayed"`
+	RoundsWin           int    `json:"roundsWin"`
+	RoundsWinPercentage int    `json:"roundsWinPercentage"`
 }
 
 type StatsMapsCommon struct {
 	MapName                  string `json:"mapName"`
-	Played                   int64  `json:"played"`
-	Team1Win                 int64  `json:"team1Win"`
-	Team1WinPercentage       int64  `json:"team1WinPercentage"`
-	Team1RoundsWin           int64  `json:"team1RoundsWin"`
-	Team1RoundsWinPercentage int64  `json:"team1RoundsWinPercentage"`
-	Team2Win                 int64  `json:"team2Win"`
-	Team2WinPercentage       int64  `json:"team2WinPercentage"`
-	Team2RoundsWin           int64  `json:"team2RoundsWin"`
-	Team2RoundsWinPercentage int64  `json:"team2RoundsWinPercentage"`
+	Played                   int    `json:"played"`
+	Team1Win                 int    `json:"team1Win"`
+	Team1WinPercentage       int    `json:"team1WinPercentage"`
+	Team1RoundsWin           int    `json:"team1RoundsWin"`
+	Team1RoundsWinPercentage int    `json:"team1RoundsWinPercentage"`
+	Team2Win                 int    `json:"team2Win"`
+	Team2WinPercentage       int    `json:"team2WinPercentage"`
+	Team2RoundsWin           int    `json:"team2RoundsWin"`
+	Team2RoundsWinPercentage int    `json:"team2RoundsWinPercentage"`
 }

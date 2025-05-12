@@ -25,9 +25,9 @@ var (
 
 var (
 	// Marshal defines function used to encode JSON payloads
-	Marshal func(v interface{}) ([]byte, error) = json.Marshal
+	Marshal func(v any) ([]byte, error) = json.Marshal
 	// Unmarshal defines function used to decode JSON payloads
-	Unmarshal func(src []byte, v interface{}) error = json.Unmarshal
+	Unmarshal func(src []byte, v any) error = json.Unmarshal
 )
 
 // RESTError stores error information about a request with a bad response code.
@@ -153,12 +153,12 @@ func WithUseCache(use bool) RequestOption {
 }
 
 // Request is the same as RequestWithBucketID but the bucket id is the same as the urlStr
-func (s *Session) Request(method, urlStr string, data interface{}, options ...RequestOption) (response []byte, err error) {
+func (s *Session) Request(method, urlStr string, data any, options ...RequestOption) (response []byte, err error) {
 	return s.RequestWithBucketID(method, urlStr, data, strings.SplitN(urlStr, "?", 2)[0], options...)
 }
 
 // RequestWithBucketID makes a (GET/POST/...) Requests to Discord REST API with JSON data.
-func (s *Session) RequestWithBucketID(method, urlStr string, data interface{}, bucketID string, options ...RequestOption) (response []byte, err error) {
+func (s *Session) RequestWithBucketID(method, urlStr string, data any, bucketID string, options ...RequestOption) (response []byte, err error) {
 	var body []byte
 	if data != nil {
 		body, err = Marshal(data)
@@ -320,7 +320,7 @@ func (s *Session) RequestWithLockedBucket(method, urlStr, contentType string, b 
 	return
 }
 
-func unmarshal(data []byte, v interface{}) error {
+func unmarshal(data []byte, v any) error {
 	err := Unmarshal(data, v)
 	if err != nil {
 		return fmt.Errorf("%w: %s", ErrJSONUnmarshal, err)

@@ -166,7 +166,7 @@ func read_token_from_dotenv() string {
 	return ""
 }
 
-func pp(v interface{}) {
+func pp(v any) {
 	b, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {
 		fmt.Println(err)

@@ -1,14 +1,14 @@
 package vrmlgo
 
 type TeamDetails struct {
-	Team            *Team         `json:"team"`
-	Season          *Season       `json:"season"`
-	SeasonTeam      interface{}   `json:"seasonTeam"`
-	SeasonPlayers   interface{}   `json:"seasonPlayers"`
-	SeasonStatsMaps []interface{} `json:"seasonStatsMaps"`
-	SeasonMatches   []interface{} `json:"seasonMatches"`
-	ExMembers       []*User       `json:"exMembers"`
-	Context         *Context      `json:"context"`
+	Team            *Team    `json:"team"`
+	Season          *Season  `json:"season"`
+	SeasonTeam      any      `json:"seasonTeam"`
+	SeasonPlayers   any      `json:"seasonPlayers"`
+	SeasonStatsMaps []any    `json:"seasonStatsMaps"`
+	SeasonMatches   []any    `json:"seasonMatches"`
+	ExMembers       []*User  `json:"exMembers"`
+	Context         *Context `json:"context"`
 }
 
 func (t TeamDetails) ID() string {

@@ -3,14 +3,14 @@ package vrmlgo
 import "slices"
 
 type Member struct {
-	User                          *User       `json:"user"`
-	Games                         []UserGame  `json:"allGames"`
-	AllPlayersSameDiscord         interface{} `json:"allPlayersSameDiscord"`
-	AllPlayersSameIP              interface{} `json:"allPlayersSameIP"`
-	PenaltyPoints                 interface{} `json:"penaltyPoints"`
-	BanInfo                       interface{} `json:"banInfo"`
-	LocationFromIP                interface{} `json:"locationFromIP"`
-	CurrentUserIsModInRelatedGame bool        `json:"currentUserIsModInRelatedGame"`
+	User                          *User      `json:"user"`
+	Games                         []UserGame `json:"allGames"`
+	AllPlayersSameDiscord         any        `json:"allPlayersSameDiscord"`
+	AllPlayersSameIP              any        `json:"allPlayersSameIP"`
+	PenaltyPoints                 any        `json:"penaltyPoints"`
+	BanInfo                       any        `json:"banInfo"`
+	LocationFromIP                any        `json:"locationFromIP"`
+	CurrentUserIsModInRelatedGame bool       `json:"currentUserIsModInRelatedGame"`
 }
 
 // PlayerID returns the player ID of the user for a given game.
