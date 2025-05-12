@@ -19,6 +19,6 @@ func New(token string) (s *Session) {
 		ShouldRetryOnRateLimit: true,
 		MaxRestRetries:         3,
 		Client:                 &http.Client{Timeout: (20 * time.Second)},
-		UserAgent:              "vrmlgo (https://github.com/echotools/vrmlgo, v" + VERSION + ")",
+		UserAgent:              "vrmlgo (https://github.com/thesprockee/vrmlgo, v" + VERSION + ")",
 	}
 }

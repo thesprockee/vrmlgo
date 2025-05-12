@@ -1,3 +1,3 @@
-module github.com/echotools/vrmlgo/v5
+module github.com/thesprockee/vrmlgo/v5
 
-go 1.23.4
+go 1.18

@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/echotools/vrmlgo/v5"
+	"github.com/thesprockee/vrmlgo/v5"
 )
 
 func main() {
